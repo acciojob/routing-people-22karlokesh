@@ -12,6 +12,7 @@
 
 // export default App
 
+import "regenerator-runtime/runtime";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import './../styles/App.css';
