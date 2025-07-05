@@ -14,7 +14,7 @@
 
 import "regenerator-runtime/runtime";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 import './../styles/App.css';
 
 const UserList = () => {
@@ -39,7 +39,7 @@ const UserList = () => {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            <a href={`/users/${user.id}`}>{user.name}</a>
+            <Link to={`/users/${user.id}`}>{user.name}</Link>
           </li>
         ))}
       </ul>
@@ -54,10 +54,11 @@ const UserDetails = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
+      setLoading(true); // ensure loading set first
       try {
         const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
         const data = await res.json();
+        await new Promise(resolve => setTimeout(resolve, 300)); // artificial delay for Cypress
         setUser(data);
       } catch (err) {
         console.error(err);
